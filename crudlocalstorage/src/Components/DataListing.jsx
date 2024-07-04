@@ -1,6 +1,6 @@
 import React from 'react'
 
-function DataListing({arr,handleDelete}) {
+function DataListing({arr,handleDelete,handleEdit}) {
 
   return (
     <>
@@ -14,7 +14,7 @@ function DataListing({arr,handleDelete}) {
                           </div>
                           <div>
                               <h1>{el.title} - {el.des}</h1>
-                              <button>Edit</button>
+                              <button onClick={()=>handleEdit(el.id)}>Edit</button>
                               <button onClick={()=>handleDelete(el.id)}>Delete</button>
 
                           </div>

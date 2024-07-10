@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 function SingleProduct() {
  
   const deepak = useParams()
-  console.log(deepak.id)
   const [state,setState] = useState({})
   useEffect(()=>{
     fetch(`https://fakestoreapi.com/products/${deepak.id}`)

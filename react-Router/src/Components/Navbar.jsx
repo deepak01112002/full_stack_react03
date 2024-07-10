@@ -8,6 +8,7 @@ function Navbar() {
       <NavLink activeClassName="active" to={"/product"}>Product</NavLink>
       <NavLink activeClassName="active" to={"/women"}>Women</NavLink>
       <NavLink activeClassName="active" to={"/cart"}>Cart</NavLink>
+      <NavLink activeClassName="active" to={"/login"}>Login</NavLink>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { INCREASE5 } from '../Redux/actionType'
+import {d} from "../Redux/action"
 
 function Counter2() {
 
@@ -11,7 +12,7 @@ function Counter2() {
   return (
     <div>
        <h1>{value.count2}</h1>
-       <button onClick={()=>dispatch({type : INCREASE5})}>+5</button>
+       <button onClick={()=>dispatch(d())}>+5</button>
     </div>
   )
 }

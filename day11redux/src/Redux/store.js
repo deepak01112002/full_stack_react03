@@ -1,5 +1,6 @@
 import {legacy_createStore} from "redux"
-import reducer from "./action"
+import reducer from "./reducer"
+
 
 
 

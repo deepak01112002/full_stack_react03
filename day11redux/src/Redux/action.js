@@ -1,34 +1,6 @@
-import { DECREASE, INCREASE, INCREASE5 } from "./actionType"
+import { INCREASE5 } from "./actionType"
 
 
-
-let initial = {
-    count : 0,
-    count2 : 0
+export const d=()=>{
+    return {type : INCREASE5,payload : 50}
 }
-const reducer = (state = initial,action)=>{
-     
-    switch(action.type){
-        case INCREASE:
-            return {
-                ...state,
-                count : state.count + 1
-            }
-        case DECREASE : 
-            return {
-                ...state,
-                count : state.count - 1
-            }
-        case INCREASE5 : 
-             return {
-                ...state,
-                count2 : state.count2 + 5
-             }    
-        default:
-            return state        
-    }
-
-
-}
-
-export default reducer

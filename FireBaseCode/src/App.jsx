@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from './Fierbase/firebase';
 
 function App() {
       const [email,setEmail] = useState("");
       const [pass,setPass] = useState("")
       const [data,setData] = useState([])
+      const [edit,setEdit] = useState(null)
  
         const userCollection  = collection(db,"users")
 
@@ -18,9 +19,20 @@ function App() {
           email : email,
           password : pass
         }
-       let d = await addDoc(userCollection,obj)
+        if(edit != null){
+             let d = doc(db,"users", edit);
+             await updateDoc(d,obj)
+             
+        }else{
+          let d = await addDoc(userCollection,obj)
+          alert(`Data added successfully with id ${d.id}`)
+        }
+       
+        setPass("")
+        setEmail("")
+        setEdit(null)
        getData()
-       alert(`Data added successfully with id ${d.id}`)
+       
       }
      
 
@@ -44,12 +56,22 @@ function App() {
       alert("Data Deleted Successfully")
     }
 
+    const handleEdit =(id)=>{
+      setEdit(id)
+      data.forEach((el)=>{
+        if(el.id == id){
+           setEmail(el.email)
+           setPass(el.password)
+        }
+      })
+    }
+
   return (
     <>
       <form action="" onSubmit={handleSubmit}>
-          <input type="text" onChange={(e)=>setEmail(e.target.value)}/>
-          <input type="text" onChange={(e)=>setPass(e.target.value)}/>
-          <input type="submit" />
+          <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+          <input type="text" value={pass} onChange={(e)=>setPass(e.target.value)}/>
+          <input type="submit" value={edit != null ? "Update" : "Submit"} />
       </form>
       {
         data.map((el)=>{
@@ -57,7 +79,7 @@ function App() {
                  <div key={el.id}>
                      <h3>{el.email} - {el.password}</h3>
                      <button onClick={()=>handleDelete(el.id)}>Delete</button>
-                     <button>Edit</button>
+                     <button onClick={()=>handleEdit(el.id)}>Edit</button>
                  </div>
             )
         })
